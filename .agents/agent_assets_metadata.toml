@@ -1,0 +1,50 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "lKhlg3EGklo0WVxIqIUGn"
+uri = "file://artifacts/cine-open/src/assets/cinema-setup.png"
+type = "image"
+title = "cinematic outdoor cinema setup at sunset"
+
+[[generated]]
+id = "PrqY4rUuvHQspPH1i9jC4"
+uri = "file://artifacts/cine-open/src/assets/rotterdam-skyline.png"
+type = "image"
+title = "moody rotterdam skyline twilight"
+
+[[generated]]
+id = "uQYFPmhEgkKW60bmcuhCh"
+uri = "file://artifacts/cine-open/src/assets/projector-beam.png"
+type = "image"
+title = "vintage glowing film projector beam"
+
+[[generated]]
+id = "QokJTeAHOMEYfNmmFMf4j"
+uri = "file://artifacts/cine-open/src/assets/rooftop-night.png"
+type = "image"
+title = "luxurious nighttime rooftop terrace"
+
+[[generated]]
+id = "TX-sjwqD34uS4cEtPbYkq"
+uri = "file://attached_assets/cinema-setup.png"
+type = "image"
+title = "cinema setup sunset rooftop"
+
+[[generated]]
+id = "xqEVnkN0EaCz9MZZEBQB4"
+uri = "file://attached_assets/rotterdam-skyline.png"
+type = "image"
+title = "Rotterdam skyline twilight Maas"
+
+[[generated]]
+id = "PG-0KpOcgxyBLQMC6Rx2K"
+uri = "file://attached_assets/projector-beam.png"
+type = "image"
+title = "projector beam cinematic dark"
+
+[[generated]]
+id = "Ms4MeodyUS3pumq2hy-Kh"
+uri = "file://attached_assets/rooftop-night.png"
+type = "image"
+title = "rooftop night Rotterdam gathering"
