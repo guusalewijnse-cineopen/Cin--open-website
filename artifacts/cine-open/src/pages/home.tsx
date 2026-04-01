@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "wouter";
 import { ChevronDown, MapPin, Ticket, Headphones, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,6 +41,15 @@ export default function Home() {
       {/* Film grain texture */}
       <div className="film-grain"></div>
 
+      {/* Nav */}
+      <div className="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex justify-end">
+        <Link href="/over-ons">
+          <button className="text-foreground/50 hover:text-primary transition-colors font-sans text-sm uppercase tracking-widest">
+            Over ons
+          </button>
+        </Link>
+      </div>
+
       {/* Hero Section */}
       <section className="relative h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
         <motion.div 
@@ -62,7 +72,6 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="text-primary font-sans tracking-[0.2em] text-sm uppercase mb-6 block">Zomer 2025</span>
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-foreground mb-6 drop-shadow-2xl">
               Ciné Open
             </h1>
@@ -99,7 +108,7 @@ export default function Home() {
               </h2>
               <div className="space-y-6 text-lg text-foreground/70 font-light font-sans leading-relaxed">
                 <p>
-                  Ciné Open brengt de magie van cinema terug naar de essentie. Geen eindeloze rijen, geen afleiding. Gewoon een zorgvuldig geselecteerde locatie in Rotterdam, maximaal 100 gasten, en de zwoele zomeravond.
+                  Ciné Open brengt de magie van cinema terug naar de essentie. Geen eindeloze rijen, geen afleiding. Gewoon een zorgvuldig geselecteerde locatie in Rotterdam, maximaal 125 gasten, en de zwoele zomeravond.
                 </p>
                 <p>
                   Plof neer in een comfortabele strandstoel met een warme deken. Zet je silent disco-koptelefoon op en laat je meeslepen door de film, terwijl de stad langzaam in het donker verdwijnt.
@@ -119,7 +128,7 @@ export default function Home() {
                     <Ticket className="w-5 h-5" />
                   </div>
                   <h3 className="font-serif text-xl">Intiem</h3>
-                  <p className="text-sm text-foreground/60 font-sans">Strikt gelimiteerd tot ±100 plekken per avond.</p>
+                  <p className="text-sm text-foreground/60 font-sans">Strikt gelimiteerd tot ±125 plekken per avond.</p>
                 </div>
               </div>
             </motion.div>
