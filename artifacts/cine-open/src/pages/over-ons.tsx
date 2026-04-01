@@ -70,9 +70,17 @@ export default function OverOns() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-16 pt-10 border-t border-white/10"
             >
-              <p className="font-serif text-xl text-foreground/60 italic mb-1">Justin Pries</p>
-              <p className="text-sm text-foreground/40 font-sans">Oprichter, Ciné Open</p>
-              <div className="flex flex-col sm:flex-row gap-4 mt-6 text-sm font-sans text-foreground/50">
+              <div className="flex flex-col sm:flex-row gap-10">
+                <div>
+                  <p className="font-serif text-xl text-foreground/60 italic mb-1">Justin Pries</p>
+                  <p className="text-sm text-foreground/40 font-sans">Oprichter, Ciné Open</p>
+                </div>
+                <div>
+                  <p className="font-serif text-xl text-foreground/60 italic mb-1">Guus Alewijnse</p>
+                  <p className="text-sm text-foreground/40 font-sans">Oprichter, Ciné Open</p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 mt-8 text-sm font-sans text-foreground/50">
                 <a href="mailto:info@cine-open.nl" className="hover:text-primary transition-colors">info@cine-open.nl</a>
                 <a href="tel:+31641873246" className="hover:text-primary transition-colors">+31 6 4187 3246</a>
               </div>
