@@ -59,9 +59,9 @@ export default function Home() {
           <img 
             src={skylineImg} 
             alt="Rotterdam Skyline" 
-            className="w-full h-full object-cover opacity-40 object-center"
+            className="w-full h-full object-cover opacity-65 object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
           {/* Amber glow */}
           <div className="ambient-light bg-primary/20 w-[600px] h-[600px] top-[-200px] left-1/2 -translate-x-1/2"></div>
         </motion.div>

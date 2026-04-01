@@ -81,9 +81,9 @@
   --popover-foreground: 40 30% 96%;
   --popover-border: 220 30% 18%;
 
-  /* Warm Amber / Gold */
-  --primary: 43 74% 55%;
-  --primary-foreground: 222 47% 7%;
+  /* Ciné Open brand green */
+  --primary: 152 38% 38%;
+  --primary-foreground: 40 30% 96%;
 
   /* Deep Navy Accent */
   --secondary: 220 40% 16%;
@@ -92,16 +92,16 @@
   --muted: 220 30% 18%;
   --muted-foreground: 220 20% 65%;
 
-  --accent: 43 74% 55%;
-  --accent-foreground: 222 47% 7%;
+  --accent: 152 38% 38%;
+  --accent-foreground: 40 30% 96%;
 
   --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 100%;
 
   --input: 220 30% 18%;
-  --ring: 43 74% 55%;
+  --ring: 152 38% 38%;
 
-  --chart-1: 43 74% 55%;
+  --chart-1: 152 38% 38%;
   --chart-2: 220 40% 16%;
   --chart-3: 30 60% 50%;
   --chart-4: 210 50% 30%;
