@@ -93,12 +93,12 @@ export default function OverOns() {
                   Ciné Open is ontstaan vanuit een simpele gedachte: een
                   filmavond hoort bijzonder te zijn. Niet een avond waarbij je
                   in een rij staat, anoniem plaatsneemt en daarna snel naar
-                  buiten loopt — maar een avond die je onthoudt.
+                  buiten loopt, maar een avond die je onthoudt.
                 </p>
                 <p>
                   We wonen al jaren in Rotterdam en kennen de hoeken, de
                   uitzichten en de plekken die je eigenlijk alleen kent als je
-                  er echt woont. Die plekken willen we laten zien — niet als
+                  er echt woont. Die plekken willen we laten zien, niet als
                   decor, maar als hoofdrolspeler.
                 </p>
                 <p>
