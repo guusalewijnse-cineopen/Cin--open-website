@@ -19,8 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import skylineImg from "@/assets/rotterdam-skyline.png";
-import cinemaSetupImg from "@/assets/cinema-setup.png";
-import rooftopImg from "@/assets/rooftop-night.png";
+import strip0 from "@/assets/strip-0.jpg";
+import strip1 from "@/assets/strip-1.jpg";
+import strip2 from "@/assets/strip-2.jpg";
 
 const pillars = [
   {
@@ -385,7 +386,7 @@ export default function Home() {
       <section className="py-12 md:py-16 bg-secondary/40">
         <div className="container mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            {[cinemaSetupImg, rooftopImg, skylineImg].map((src, i) => (
+            {[strip0, strip1, strip2].map((src, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 16 }}
