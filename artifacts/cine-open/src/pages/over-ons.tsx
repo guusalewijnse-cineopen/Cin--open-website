@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowLeft, Film, Mail, Phone, Instagram } from "lucide-react";
 import skylineImg from "@/assets/rotterdam-skyline.png";
+import logoMark from "@/assets/logo-mark-clean.png";
 
 export default function OverOns() {
   return (
@@ -14,12 +15,11 @@ export default function OverOns() {
               data-testid="link-home"
               className="flex items-center gap-3 group"
             >
-              <div className="w-9 h-12 bg-primary/90 rounded-sm flex items-center justify-center">
-                <Film className="w-5 h-5 text-primary-foreground" strokeWidth={1.5} />
-              </div>
-              <span className="font-serif text-xl text-primary tracking-tight">
-                Ciné Open
-              </span>
+              <img
+                src={logoMark}
+                alt="Ciné Open"
+                className="h-12 w-auto"
+              />
             </button>
           </Link>
           <Link href="/">

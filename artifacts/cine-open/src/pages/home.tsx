@@ -19,6 +19,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import skylineImg from "@/assets/rotterdam-skyline.png";
+import logoMark from "@/assets/logo-mark-clean.png";
+import logoWordmark from "@/assets/logo-wordmark-clean.png";
 import strip0 from "@/assets/strip-0.jpg";
 import strip1 from "@/assets/strip-1.jpg";
 import strip2 from "@/assets/strip-2.jpg";
@@ -110,12 +112,11 @@ export default function Home() {
       <header className="absolute top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-6 md:px-10 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-12 bg-primary/90 rounded-sm flex items-center justify-center">
-              <Film className="w-5 h-5 text-primary-foreground" strokeWidth={1.5} />
-            </div>
-            <span className="font-serif text-xl text-primary tracking-tight">
-              Ciné Open
-            </span>
+            <img
+              src={logoMark}
+              alt="Ciné Open"
+              className="h-12 w-auto"
+            />
           </div>
           <Link href="/over-ons">
             <button
@@ -143,12 +144,12 @@ export default function Home() {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 Coming soon · Zomer 2026
               </div>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] text-primary tracking-tight">
-                Ciné Open
-              </h1>
-              <p className="mt-6 text-2xl md:text-3xl font-serif italic text-foreground/70">
-                Meer dan alleen een film.
-              </p>
+              <h1 className="sr-only">Ciné Open — Meer dan alleen een film.</h1>
+              <img
+                src={logoWordmark}
+                alt="Ciné Open — Meer dan alleen een film."
+                className="w-full max-w-[520px] h-auto"
+              />
               <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/75 font-sans leading-relaxed">
                 Ciné Open organiseert intieme openluchtfilmavonden op
                 bijzondere locaties in Rotterdam. Samen creëren we een unieke
