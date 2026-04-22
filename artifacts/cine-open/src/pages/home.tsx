@@ -144,12 +144,9 @@ export default function Home() {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 Coming soon · Zomer 2026
               </div>
-              <h1 className="sr-only">Ciné Open</h1>
-              <img
-                src={logoWordmark}
-                alt="Ciné Open"
-                className="w-full max-w-[520px] h-auto"
-              />
+              <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] leading-[0.95] text-primary tracking-tight">
+                Ciné Open
+              </h1>
               <p className="mt-6 text-2xl md:text-3xl font-serif italic text-foreground/70">
                 Meer dan alleen een film.
               </p>
