@@ -48,3 +48,21 @@ id = "Ms4MeodyUS3pumq2hy-Kh"
 uri = "file://attached_assets/rooftop-night.png"
 type = "image"
 title = "rooftop night Rotterdam gathering"
+
+[[generated]]
+id = "_ep7aSUFQ2EndiSAlyXNR"
+uri = "file://artifacts/cine-open/src/assets/strip-0.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "qlIqUHlHbFfV3v0qEHJLa"
+uri = "file://artifacts/cine-open/src/assets/strip-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "bRym0LFzQOb2efL3elJUj"
+uri = "file://artifacts/cine-open/src/assets/strip-2.png"
+type = "image"
+title = "generated_image"

@@ -21,9 +21,9 @@ import { Input } from "@/components/ui/input";
 import skylineImg from "@/assets/rotterdam-skyline.png";
 import logoMark from "@/assets/logo-mark.png";
 import logoWordmark from "@/assets/logo-wordmark.png";
-import strip0 from "@/assets/strip-0.jpg";
-import strip1 from "@/assets/strip-1.jpg";
-import strip2 from "@/assets/strip-2.jpg";
+import strip0 from "@/assets/strip-0.png";
+import strip1 from "@/assets/strip-1.png";
+import strip2 from "@/assets/strip-2.png";
 
 const pillars = [
   {
