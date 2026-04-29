@@ -358,7 +358,7 @@ export default function Home() {
                         }`}
                       >
                         <div className="flex items-start gap-4">
-                          <div className="shrink-0 inline-flex items-center justify-center w-16 h-9 rounded-full bg-primary text-primary-foreground font-sans text-xs tracking-wider">
+                          <div className="shrink-0 inline-flex items-center justify-center h-9 px-3 min-w-16 rounded-full bg-primary text-primary-foreground font-sans text-xs tracking-wider whitespace-nowrap">
                             {item.time}
                           </div>
                           <div className="flex-1">
