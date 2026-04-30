@@ -14,9 +14,17 @@ import {
   Coffee,
   Star,
   Truck,
+  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { useSubscribeEmail } from "@workspace/api-client-react";
 
 import skylineImg from "@/assets/rotterdam-skyline.png";
 import logoMark from "@/assets/logo-mark.png";
@@ -94,17 +102,67 @@ const stats = [
   { icon: Users, value: "120", label: "gemiddeld bezoekers per avond" },
 ];
 
+const faqs = [
+  {
+    q: "Wat als het regent?",
+    a: "Bij lichte regen gaat de avond gewoon door, we zorgen voor schuilmogelijkheden en de koptelefoons zijn waterbestendig. Bij voorspelde zware regen of onweer verplaatsen we de avond naar een back-updatum. Ticketkopers worden minimaal vier uur van tevoren via e-mail geïnformeerd.",
+  },
+  {
+    q: "Wat kost een kaartje ongeveer?",
+    a: "Tickets komen rond de €17,50 te liggen, inclusief koptelefoon en het hele programma. Een drankje of versnapering bestel je apart bij onze barpartner ter plaatse.",
+  },
+  {
+    q: "Is er ook eten en drinken?",
+    a: "Ja, op iedere locatie is een verzorgde bar aanwezig met wijn, bier, fris en lichte hapjes. Eten van buitenaf is niet toegestaan, zo houden we het verzorgd voor iedereen.",
+  },
+  {
+    q: "Hoe zit het met parkeren en OV?",
+    a: "Al onze locaties zijn goed bereikbaar met het openbaar vervoer en op de fiets. Per locatie delen we een week van tevoren een handige bereikbaarheidskaart met parkeertips in de buurt.",
+  },
+  {
+    q: "Vanaf welke leeftijd ben ik welkom?",
+    a: "Onze avonden zijn afgestemd op een jongvolwassen publiek, vanaf 18 jaar. Bij sommige films of locaties kan een afwijkende leeftijdsgrens gelden, dat vermelden we altijd duidelijk bij het ticket.",
+  },
+  {
+    q: "Wanneer start de kaartverkoop?",
+    a: "De kaartverkoop start in het voorjaar van 2026. Schrijf je in via het formulier hierboven, dan krijg je als eerste bericht zodra de programmering en tickets bekend zijn.",
+  },
+];
+
 export default function Home() {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [feedback, setFeedback] = useState<
+    | { kind: "success"; alreadySubscribed: boolean }
+    | { kind: "error"; message: string }
+    | null
+  >(null);
+
+  const subscribeMutation = useSubscribeEmail({
+    mutation: {
+      onSuccess: (data) => {
+        setFeedback({ kind: "success", alreadySubscribed: data.alreadySubscribed });
+        setEmail("");
+      },
+      onError: () => {
+        setFeedback({
+          kind: "error",
+          message:
+            "Er ging iets mis. Probeer het zo nog eens of mail ons op info@cineopen.nl.",
+        });
+      },
+    },
+  });
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail("");
-    }
+    const trimmed = email.trim();
+    if (!trimmed) return;
+    setFeedback(null);
+    subscribeMutation.mutate({ data: { email: trimmed } });
   };
+
+  const subscribed = feedback?.kind === "success";
+  const isSubmitting = subscribeMutation.isPending;
 
   return (
     <main className="relative min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary selection:text-primary-foreground">
@@ -170,15 +228,17 @@ export default function Home() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
+                      disabled={isSubmitting}
                       className="bg-card border-border h-12 text-base focus-visible:ring-primary/40 placeholder:text-muted-foreground/70"
                     />
                     <Button
                       type="submit"
                       data-testid="button-subscribe"
                       size="lg"
+                      disabled={isSubmitting}
                       className="h-12 px-6 bg-primary text-primary-foreground hover:bg-primary/90 font-sans uppercase tracking-[0.15em] text-xs"
                     >
-                      Hou mij op de hoogte
+                      {isSubmitting ? "Bezig..." : "Hou mij op de hoogte"}
                       <Send className="w-4 h-4 ml-2" />
                     </Button>
                   </form>
@@ -190,13 +250,24 @@ export default function Home() {
                     data-testid="text-subscribed"
                   >
                     <h4 className="font-serif text-xl text-primary">
-                      Bedankt voor je interesse.
+                      {feedback?.kind === "success" && feedback.alreadySubscribed
+                        ? "Je staat al op de lijst."
+                        : "Bedankt voor je interesse."}
                     </h4>
                     <p className="mt-1 text-sm text-foreground/70 font-sans">
-                      Je staat op de lijst. We laten van ons horen zodra de
-                      kaartverkoop start.
+                      {feedback?.kind === "success" && feedback.alreadySubscribed
+                        ? "Geen zorgen, we hebben je al genoteerd. Je hoort van ons zodra de kaartverkoop start."
+                        : "Je staat op de lijst. We laten van ons horen zodra de kaartverkoop start."}
                     </p>
                   </motion.div>
+                )}
+                {feedback?.kind === "error" && (
+                  <p
+                    className="mt-3 text-xs font-sans text-destructive"
+                    data-testid="text-subscribe-error"
+                  >
+                    {feedback.message}
+                  </p>
                 )}
                 <p className="mt-3 text-xs text-muted-foreground font-sans">
                   Eerste in de rij voor tickets, locaties en de filmprogrammering.
@@ -408,6 +479,73 @@ export default function Home() {
           <p className="text-center mt-8 font-serif italic text-foreground/60">
             Samen maken we van jouw locatie een filmervaring om nooit te vergeten.
           </p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-20 md:py-28 bg-secondary/50">
+        <div className="container mx-auto px-6 md:px-10">
+          <div className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7 }}
+              className="text-center mb-12"
+            >
+              <div className="inline-flex items-center gap-2 text-primary mb-4">
+                <HelpCircle className="w-4 h-4" strokeWidth={1.5} />
+                <h2 className="font-sans uppercase tracking-[0.25em] text-xs">
+                  Veelgestelde vragen
+                </h2>
+              </div>
+              <h3 className="font-serif text-3xl md:text-5xl text-foreground leading-tight">
+                Goed om te weten.
+              </h3>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              <Accordion
+                type="single"
+                collapsible
+                className="w-full space-y-3"
+                data-testid="accordion-faq"
+              >
+                {faqs.map((item, i) => (
+                  <AccordionItem
+                    key={item.q}
+                    value={`faq-${i}`}
+                    className="border border-card-border bg-card rounded-sm px-5 [&[data-state=open]]:border-primary/40"
+                    data-testid={`faq-item-${i}`}
+                  >
+                    <AccordionTrigger className="font-serif text-base md:text-lg text-foreground text-left hover:no-underline py-5">
+                      {item.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="font-sans text-sm md:text-base text-foreground/75 leading-relaxed pb-5">
+                      {item.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+
+            <p className="mt-10 text-center font-sans text-sm text-foreground/60">
+              Andere vraag?{" "}
+              <a
+                href="mailto:info@cineopen.nl"
+                className="text-primary hover:underline"
+                data-testid="link-faq-email"
+              >
+                Mail ons op info@cineopen.nl
+              </a>
+              .
+            </p>
+          </div>
         </div>
       </section>
 

@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: subscribers
+    description: Newsletter subscribers
 paths:
   /healthz:
     get:
@@ -24,6 +26,31 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /subscribers:
+    post:
+      operationId: subscribeEmail
+      tags: [subscribers]
+      summary: Subscribe an email address
+      description: Adds an email address to the Ciné Open mailing list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscribeRequest"
+      responses:
+        "200":
+          description: Subscribed (or already subscribed)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscribeResponse"
+        "400":
+          description: Invalid email
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +60,31 @@ components:
           type: string
       required:
         - status
+    SubscribeRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 3
+          maxLength: 254
+      required:
+        - email
+    SubscribeResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        alreadySubscribed:
+          type: boolean
+      required:
+        - ok
+        - alreadySubscribed
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
 

@@ -94,3 +94,13 @@ Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHea
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
+
+## Ciné Open app (`artifacts/cine-open`)
+
+Coming-soon site for "Ciné Open" — Rotterdam's intimate outdoor cinema concept (Zomer 2026). Light editorial theme on cream background with forest-green primary. Dutch content. Pages: Home (`/`) and Over ons (`/over-ons`).
+
+Home sections (in order): hero with email signup, green pillars band, About + stats + timeline, photo strip, FAQ accordion (6 Q&A), final CTA with `info@cineopen.nl` + Instagram `@cineopen.nl`, footer.
+
+### Email signup
+
+The hero email form persists addresses to a `subscribers` table via `POST /api/subscribers` (operationId `subscribeEmail`). Schema in `lib/db/src/schema/subscribers.ts` (`email` unique-indexed, lowercased server-side). Endpoint defined in `lib/api-spec/openapi.yaml`; route handler in `artifacts/api-server/src/routes/subscribers.ts`. Frontend uses the generated `useSubscribeEmail` hook from `@workspace/api-client-react`. Duplicate submissions return `{ ok: true, alreadySubscribed: true }` (idempotent, no error).

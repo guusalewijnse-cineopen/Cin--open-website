@@ -5,18 +5,26 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
 
-import type { HealthStatus } from "./api.schemas";
+import type {
+  ErrorResponse,
+  HealthStatus,
+  SubscribeRequest,
+  SubscribeResponse,
+} from "./api.schemas";
 
 import { customFetch } from "../custom-fetch";
-import type { ErrorType } from "../custom-fetch";
+import type { ErrorType, BodyType } from "../custom-fetch";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -99,3 +107,90 @@ export function useHealthCheck<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * Adds an email address to the Ciné Open mailing list
+ * @summary Subscribe an email address
+ */
+export const getSubscribeEmailUrl = () => {
+  return `/api/subscribers`;
+};
+
+export const subscribeEmail = async (
+  subscribeRequest: SubscribeRequest,
+  options?: RequestInit,
+): Promise<SubscribeResponse> => {
+  return customFetch<SubscribeResponse>(getSubscribeEmailUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(subscribeRequest),
+  });
+};
+
+export const getSubscribeEmailMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof subscribeEmail>>,
+    TError,
+    { data: BodyType<SubscribeRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof subscribeEmail>>,
+  TError,
+  { data: BodyType<SubscribeRequest> },
+  TContext
+> => {
+  const mutationKey = ["subscribeEmail"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof subscribeEmail>>,
+    { data: BodyType<SubscribeRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return subscribeEmail(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SubscribeEmailMutationResult = NonNullable<
+  Awaited<ReturnType<typeof subscribeEmail>>
+>;
+export type SubscribeEmailMutationBody = BodyType<SubscribeRequest>;
+export type SubscribeEmailMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Subscribe an email address
+ */
+export const useSubscribeEmail = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof subscribeEmail>>,
+    TError,
+    { data: BodyType<SubscribeRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof subscribeEmail>>,
+  TError,
+  { data: BodyType<SubscribeRequest> },
+  TContext
+> => {
+  return useMutation(getSubscribeEmailMutationOptions(options));
+};

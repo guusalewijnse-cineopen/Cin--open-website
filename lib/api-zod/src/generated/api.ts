@@ -14,3 +14,23 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Adds an email address to the Ciné Open mailing list
+ * @summary Subscribe an email address
+ */
+export const subscribeEmailBodyEmailMin = 3;
+export const subscribeEmailBodyEmailMax = 254;
+
+export const SubscribeEmailBody = zod.object({
+  email: zod
+    .string()
+    .email()
+    .min(subscribeEmailBodyEmailMin)
+    .max(subscribeEmailBodyEmailMax),
+});
+
+export const SubscribeEmailResponse = zod.object({
+  ok: zod.boolean(),
+  alreadySubscribed: zod.boolean(),
+});

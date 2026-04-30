@@ -5,9 +5,6 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
 
 export interface SubscribeRequest {
   /**
@@ -15,13 +12,4 @@ export interface SubscribeRequest {
    * @maxLength 254
    */
   email: string;
-}
-
-export interface SubscribeResponse {
-  ok: boolean;
-  alreadySubscribed: boolean;
-}
-
-export interface ErrorResponse {
-  error: string;
 }
